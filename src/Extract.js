@@ -8,43 +8,68 @@ class Extract extends Component {
         super(props);
         this.state={
             data:[],
-            
-                date:[],
-                hours:[]
+            final:[],
+            element:[],
         }
       }
   componentDidMount() {
       var scope=this;
-    d3.csv(denny).then(function(data) {
+      var arr=scope.state.data;
+      d3.csv(denny).then(function(data) {
         // console.log(data);
         scope.setState({
             data:data
         },()=>{
-          //  console.log(scope.state.data)
-          scope.state.data.reverse().map((value)=>{
-            var x=value.StartTime+" "+value.st+" "+value.s;
-            var y=value.StopTime+" "+value.et+" "+value.e;
-            var date1=new Date(x);
-            var date2=new Date(y);
-            var res = Math.abs(date2 - date1) / 1000;
-            var hours = Math.ceil(res / 3600) % 24;  
-           // console.log(value.StartTime);
+          // console.log(scope.state.data)
+           var ele=[{StartTime: "",StopTime: "",e: "",et: "",
+           s: "",
+           st: ""
+        }];
+          scope.state.data.reverse().map((item)=>{
+           var temp= item.StartTime;
+                var temp1=ele.findIndex(k=> k.StartTime===temp);
+                if(temp1===-1){
+                ele.push(item);
 
-            scope.setState({
-               date: scope.state.date.push(value.StartTime),
-                    hours: scope.state.hours.push(hours)
-            },()=>{
-            })  
-            
-        }) 
-        console.log(scope.state.date);
-        console.log(scope.state.hours);
+            }
+           else{
+            //    if(ele[temp1].et>item.et){
+            //     console.log("hello")
+            //    }
+            //    else{
+                ele[temp1].et=item.et;
+                ele[temp1].e=item.e;
+                ele[temp1].StopTime=item.StopTime;
+           //    }
+           
 
         }
+
+        }) 
+       // console.log(ele)
+        scope.setState({
+            element:ele
+        },()=>{
+            console.log(scope.state.element)
+            scope.state.element.map((value)=>{
+                var x=value.StartTime+" "+value.st+" "+value.s;
+                var y=value.StopTime+" "+value.et+" "+value.e;
+                var date1=new Date(x);
+                var date2=new Date(y);
+                var res = Math.abs(date2 - date1) / 1000;
+                var hours = Math.ceil(res / 3600) % 24;  
+                let newelement = scope.state.final;
+                newelement.push({date:value.StartTime,hours:hours})
+                  scope.setState({final: newelement});
+                },()=>{
+                })  
+                
+            }) 
+            console.log(scope.state.final);
+   
+         }
     )
-        // for (let key in data) {
-        //     console.log(data[key]);
-        //   }
+      
       })
   }
   render() {
