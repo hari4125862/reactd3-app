@@ -9,7 +9,6 @@ class Extract extends Component {
         this.state={
             data:[],
             final:[],
-            final1:[],
             element:[],
         }
       }
@@ -60,21 +59,13 @@ class Extract extends Component {
                 var res = Math.abs(date2 - date1) / 1000;
                 var hours = Math.ceil(res / 3600) % 24;  
                 let newelement = scope.state.final;
-                let newelement1 = scope.state.final1;
-
-                newelement.push(hours)
-                newelement1.push(value.StartTime)
-
-                  scope.setState({final: newelement,
-                                    final1:newelement1}
-                                );
+                newelement.push({date:value.StartTime,hours:hours})
+                  scope.setState({final: newelement});
                 },()=>{
                 })  
                 
             }) 
             console.log(scope.state.final);
-            console.log(scope.state.final1);
-
    
          }
     )
@@ -85,7 +76,7 @@ class Extract extends Component {
      return (
      
        <div style={{ height: '80%' }} >
-                <BarChart data={this.state.final} size={[500,500]} data1={this.state.final1}/>
+                <BarChart data={this.state.final} />
             </div>  
         
           
