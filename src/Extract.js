@@ -2,13 +2,14 @@ import React, { Component } from "react";
 
 import * as d3 from "d3";
 import denny from "./Datasets/denny.csv";
-
+import BarChart from './chart';
 class Extract extends Component {
     constructor(props) {
         super(props);
         this.state={
             data:[],
             final:[],
+            final1:[],
             element:[],
         }
       }
@@ -59,13 +60,21 @@ class Extract extends Component {
                 var res = Math.abs(date2 - date1) / 1000;
                 var hours = Math.ceil(res / 3600) % 24;  
                 let newelement = scope.state.final;
-                newelement.push({date:value.StartTime,hours:hours})
-                  scope.setState({final: newelement});
+                let newelement1 = scope.state.final1;
+
+                newelement.push(hours)
+                newelement1.push(value.StartTime)
+
+                  scope.setState({final: newelement,
+                                    final1:newelement1}
+                                );
                 },()=>{
                 })  
                 
             }) 
             console.log(scope.state.final);
+            console.log(scope.state.final1);
+
    
          }
     )
@@ -74,12 +83,12 @@ class Extract extends Component {
   }
   render() {
      return (
-       <div>
-        hello
-
-                 
+     
+       <div style={{ height: '80%' }} >
+                <BarChart data={this.state.final} size={[500,500]} data1={this.state.final1}/>
+            </div>  
         
-           </div>
+          
      );
   }
 }
