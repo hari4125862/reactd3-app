@@ -3,10 +3,10 @@
 # React + d3 number of woking hours
 
 ## first page 
-5 different datsets
+5 different datasets
 
-##second page
-can swich between weekly bar graph analysis
+## second page
+can switch between weekly bar graph analysis
 
 ### git clone
 
