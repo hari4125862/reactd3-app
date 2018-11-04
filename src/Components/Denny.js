@@ -58,62 +58,52 @@ class Denny extends Component {
                 var hours = Math.ceil(res / 3600) % 24;  
              newelement = scope.state.final;
                 newelement.push({date:value.StartTime,hours:hours})
-                },()=>{
-                    scope.setState({final: newelement});
-
                 })  
 
 
-            
+                scope.setState({final: newelement});
+             console.log(scope.state.final);
+             var len=scope.state.final.length;
+            var temp=0;
+            var count=0;
+            let newelement2 = scope.state.week;
+
+            for(var i=1;i<len;i++){
+                    if(i%7===0){
+                        count++;
+                        temp=temp+scope.state.final[i].hours;
+
+                        newelement2.push({date:count+" week",hours:temp})
+                        scope.setState({week: newelement2});
+                        temp=0;
+                    }
+                    else{
+                        temp=temp+scope.state.final[i].hours;
+
+
+                    }
+                    newelement2.push({date:count+" week",hours:temp})
+                        scope.setState({week: newelement2});
+                }
+                    console.log(scope.state.week);
+                
 
         })
         
 
-         // var temp=0;
-    //  for(var i=1;i<30;i++){
-    //         if(i%7===0){
-    //             temp=temp+this.state.final[i].hours;
-
-    //             let newelement2 = this.state.week;
-    //             newelement2.push({date:0,hours:temp})
-    //               this.setState({week: newelement2});
-    //         }
-    //         else{
-    //             temp=temp+this.state.final[i].hours;
-
-
-    //         }
-    //     }
-    //     console.log(this.state.week);
+       
+       
 
   }
   
   render() {
-    console.log(this.state.final);
-
-    // var temp=0;
-    //  for(var i=1;i<30;i++){
-    //         if(i%7===0){
-    //             temp=temp+this.state.final[i].hours;
-
-    //             let newelement2 = this.state.week;
-    //             newelement2.push({date:0,hours:temp})
-    //               this.setState({week: newelement2});
-    //         }
-    //         else{
-    //             temp=temp+this.state.final[i].hours;
-
-
-    //         }
-    //     }
-       //  console.log(this.state.final);
      return (
      
        <div style={{ height: '100%' }} >
        <Link className="nav-link" to="/">
  <button>Back</button>
   </Link>
-                <BarChart data={this.state.final} />
+                <BarChart data={this.state.final} data1={this.state.week} />
 
             </div>  
         

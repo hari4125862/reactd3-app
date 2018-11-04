@@ -13,6 +13,12 @@ import React, { Component } from "react";
         }
         componentDidMount() {
           //  this.createBarChart()
+          // debugger;
+          // console.log(this.props.data)
+          // this.props.data.map((val)=>(
+          //   console.log(val)
+
+          // ))
         }
         // componentDidUpdate() {
         //    this.createBarChart()
@@ -112,12 +118,12 @@ import React, { Component } from "react";
   
       const xScale = d3.scaleBand()
         .range([0, width])
-        .domain(this.props.data.map((s) => s.date))
+        .domain(this.props.data1.map((s) => s.date))
         .padding(0.3)
       
       const yScale = d3.scaleLinear()
         .range([height, 0])
-        .domain([0, 25]);
+        .domain([0, 120]);
   
       const makeYLines = () => d3.axisLeft()
         .scale(yScale)
@@ -140,7 +146,7 @@ import React, { Component } from "react";
         .tickFormat('')
         )
         const barGroups = chart.selectAll()
-        .data(this.props.data)
+        .data(this.props.data1)
         .enter()
         .append('g')
   
@@ -179,6 +185,7 @@ import React, { Component } from "react";
   
   }
      render() {
+
            return( 
            <div> 
            <button onClick={this.createDailyBarChart}>daily</button>
