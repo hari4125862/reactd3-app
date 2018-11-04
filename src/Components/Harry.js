@@ -81,6 +81,8 @@ class Harry extends Component {
   render() {
      return (
         <div style={{ height: '100%' }} >
+        <h2>Harry</h2>
+
             <Link className="nav-link" to="/">
                 <button>Back</button>
             </Link>

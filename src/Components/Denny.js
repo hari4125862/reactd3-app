@@ -76,14 +76,19 @@ class Denny extends Component {
                 console.log(scope.state.week);
                 })  
 
+                
+
   }
   
   render() {
      return (
         <div style={{ height: '100%' }} >
+                   <h2>Denny</h2>
+
             <Link className="nav-link" to="/">
                 <button>Back</button>
             </Link>
+            <br/>
             <BarChart data={this.state.final} data1={this.state.week} />
         </div>  
     );
