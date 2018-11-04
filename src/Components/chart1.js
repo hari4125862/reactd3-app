@@ -1,8 +1,6 @@
 import React, { Component } from "react";
  import * as d3 from 'd3';
-// import { scaleLinear } from "d3-scale"
-// import { max } from"d3-array"
-// import { select } from "d3-selection"
+ import { Link } from "react-router-dom";
 
     class Chart1 extends Component {
         constructor(props){
@@ -11,30 +9,24 @@ import React, { Component } from "react";
 
         }
         componentDidMount() {
-           this.createBarChart()
-         
+            this.createBarChart()
         }
         componentDidUpdate() {
            this.createBarChart()
         }
-        createBarChart() {
-        
+    
 
-       
+    createBarChart() {
       const svg = d3.select('svg');
-  
       const margin = 100;
       const width = 700 - 2 * margin;
       const height = 500 - 2 * margin;
-  
       const chart = svg.append('g')
         .attr('transform', `translate(${margin}, ${margin})`);
-  
       const xScale = d3.scaleBand()
         .range([0, width])
         .domain(this.props.data1.map((s) => s.date))
         .padding(0.3)
-      
       const yScale = d3.scaleLinear()
         .range([height, 0])
         .domain([0, 120]);
@@ -94,26 +86,17 @@ import React, { Component } from "react";
       .attr('x', width / 2 + margin)
       .attr('y', 40)
       .attr('text-anchor', 'middle')
-      .text('Number of hours worked by denny per day')
+      .text('Number of hours worked weekly')
 
-  
-    
-    }
-
-   
-     render() {
-
-           return( 
-           <div> 
-            <button onClick={this.createDailyBarChart}>daily</button>
-
-
+  }
+    render() {
+      return( 
+        <div> 
           <svg ref={node => this.node = node}
-           width={800} height={500}>
-           </svg>
-
-           </div>
-           );
-        }
-     }
+             width={800} height={500}>
+          </svg>
+        </div>
+      );
+    }
+    }
      export default Chart1;
