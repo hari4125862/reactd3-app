@@ -8,7 +8,7 @@
 ## second page
 can switch between weekly bar graph analysis
 
-### git clone
+### git clone https://github.com/hari4125862/reactd3-app.git
 
 ### npm install
 
